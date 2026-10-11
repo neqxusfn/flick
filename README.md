@@ -7,7 +7,7 @@ Flick is a small Windows 11 tray app for a configurable, one-button 180° mouse 
 > [!WARNING]
 > **Account ban risk:** Flick automates a turn from one press. Online games may prohibit this even though it uses standard Windows input and does not inject into a game. A publisher may suspend or permanently ban an account. **Check each game's current rules before use; only use Flick where input automation is allowed.** Valorant and Fortnite presets are math conversions, not publisher approval. Flick starts paused and requires an in-app acknowledgment before it can be enabled. See [Account safety](docs/SAFETY.md).
 
-<!-- Screenshot placeholders: replace these preview images with signed-release native captures when available. -->
+![Flick preview with account-risk warning](docs/social-preview.png)
 
 | Light                                                | Dark                                               |
 | ---------------------------------------------------- | -------------------------------------------------- |
@@ -27,7 +27,7 @@ Screenshots show the browser preview of the same interface. Native windows use W
 
 ## Install
 
-Use the `Flick_*_x64-setup.exe` NSIS installer from a published GitHub Release, or run the standalone `Flick-portable-x64.exe`. Release artifacts are generated when a maintainer pushes a `v*` tag. Nothing is published simply by building locally.
+Use the `Flick_*_x64-setup.exe` NSIS installer from the [latest GitHub Release](https://github.com/neqxusfn/flick/releases/latest), or run the standalone `Flick-portable-x64.exe`. Release artifacts are generated when a maintainer pushes a `v*` tag. Nothing is published simply by building locally.
 
 Requires Windows 11 x64 and Microsoft Edge WebView2 Runtime (normally already installed). The small installer can bootstrap WebView2 if missing; the portable app needs it installed separately. The standalone executable still stores preferences in `%APPDATA%/Flick/`, so it is not a fully self-contained USB configuration. Builds are currently unsigned.
 
