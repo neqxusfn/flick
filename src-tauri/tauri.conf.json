@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Flick",
+  "version": "0.1.0",
+  "identifier": "app.flick.desktop",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "Flick",
+        "width": 520,
+        "height": 640,
+        "resizable": false,
+        "maximizable": false,
+        "decorations": false,
+        "shadow": true,
+        "center": true,
+        "visible": false,
+        "backgroundColor": "#F5F5F7",
+        "windowEffects": { "effects": ["mica"], "state": "active" }
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' asset: data:; connect-src ipc: http://ipc.localhost"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "icon": ["icons/icon.ico", "icons/32x32.png", "icons/128x128.png"],
+    "shortDescription": "A precise, one-button half turn.",
+    "windows": {
+      "nsis": { "displayLanguageSelector": false, "installMode": "currentUser" }
+    }
+  }
+}

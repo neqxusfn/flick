@@ -1,0 +1,150 @@
+.settings-sheet {
+  position: fixed;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  margin: 0 auto;
+  width: min(520px, 100vw);
+  height: 640px;
+  max-height: 100vh;
+  max-width: 100vw;
+  background: var(--bg);
+  color: var(--text);
+  border-radius: 12px;
+  overflow: hidden;
+  animation: sheet-enter 180ms ease-out;
+}
+.settings-sheet::backdrop {
+  background: #0002;
+}
+@keyframes sheet-enter {
+  from {
+    transform: translateX(35px);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.sheet-header {
+  height: 77px;
+  padding: 26px 24px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--line);
+}
+.sheet-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+.sheet-header > span {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--secondary);
+}
+.sheet-body {
+  overflow-y: auto;
+  height: calc(100% - 77px);
+  padding: 3px 24px 24px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--outline) transparent;
+}
+.sheet-body section {
+  margin-top: 23px;
+}
+.sheet-body h3 {
+  margin: 0 0 9px 3px;
+  color: var(--secondary);
+  font-size: 11px;
+  font-weight: 500;
+}
+.sheet-body .row {
+  min-height: 48px;
+  margin: 0 14px;
+}
+.sheet-body .row-label {
+  font-size: 13px;
+}
+.sheet-body .toggle {
+  height: 24px;
+  width: 41px;
+}
+.sheet-body .toggle span {
+  height: 18px;
+  width: 18px;
+}
+.sheet-body .toggle[aria-checked='true'] span {
+  transform: translateX(17px);
+}
+.sheet-body select {
+  max-width: 215px;
+  font-size: 12px;
+}
+.text-field {
+  background: none;
+  border: 0;
+  border-radius: 4px;
+  width: 185px;
+  min-width: 0;
+  text-align: right;
+  font-size: 12px;
+  padding: 5px;
+}
+.text-field::placeholder {
+  color: var(--secondary);
+}
+.profile-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 14px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+}
+.confirm-delete {
+  margin: 0 14px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+}
+.confirm-delete span {
+  flex: 1;
+}
+.help {
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--secondary);
+  margin: 9px 4px 0;
+}
+.compatibility {
+  display: flex;
+  gap: 12px;
+  padding: 3px 4px;
+}
+.compatibility > svg {
+  color: var(--secondary);
+  margin-top: 1px;
+}
+.compatibility strong {
+  font-weight: 500;
+  font-size: 12px;
+}
+.compatibility p {
+  color: var(--secondary);
+  font-size: 11px;
+  line-height: 1.6;
+  margin: 5px 0 8px;
+}
+.version {
+  text-align: center;
+  color: var(--secondary);
+  font-size: 10px;
+  margin: 25px 0 0;
+}

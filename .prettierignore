@@ -1,0 +1,9 @@
+node_modules
+dist
+src-tauri/target
+src-tauri/gen
+.tools
+package-lock.json
+Cargo.lock
+test-results
+playwright-report
