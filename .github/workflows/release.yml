@@ -1,0 +1,66 @@
+name: Windows build
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+          targets: x86_64-pc-windows-msvc
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm test
+      - run: npm run test:ui
+      - run: cargo fmt --manifest-path src-tauri/Cargo.toml -- --check
+      - run: cargo clippy --locked --manifest-path src-tauri/Cargo.toml --all-targets -- -D warnings
+      - run: cargo test --locked --manifest-path src-tauri/Cargo.toml
+      - run: npm run tauri build -- --target x86_64-pc-windows-msvc
+      - name: Prepare standalone executable
+        shell: pwsh
+        run: Copy-Item src-tauri/target/x86_64-pc-windows-msvc/release/flick.exe Flick-portable-x64.exe
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Flick-windows-x64
+          path: |
+            Flick-portable-x64.exe
+            src-tauri/target/x86_64-pc-windows-msvc/release/bundle/nsis/*-setup.exe
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Interface-checks
+          path: test-results/
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: Flick-windows-x64
+          path: artifacts
+      - uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            artifacts/**/Flick-portable-x64.exe
+            artifacts/**/*-setup.exe
